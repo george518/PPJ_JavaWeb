@@ -31,6 +31,17 @@ public class PpUcAdmin {
 
     private Integer updateTime;
 
+    public String getStatusText() {
+        return statusText;
+    }
+
+    public void setStatusText(String statusText) {
+        this.statusText = statusText;
+    }
+
+    //附加字段
+    private String statusText;
+
     public Integer getId() {
         return id;
     }
@@ -149,5 +160,27 @@ public class PpUcAdmin {
 
     public void setUpdateTime(Integer updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "PpUcAdmin{" +
+                "id=" + id +
+                ", loginName='" + loginName + '\'' +
+                ", realName='" + realName + '\'' +
+                ", password='" + password + '\'' +
+                ", roleIds='" + roleIds + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", salt='" + salt + '\'' +
+                ", lastLogin=" + lastLogin +
+                ", lastIp='" + lastIp + '\'' +
+                ", status=" + status +
+                ", createId=" + createId +
+                ", updateId=" + updateId +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", statusText='" + statusText + '\'' +
+                '}';
     }
 }

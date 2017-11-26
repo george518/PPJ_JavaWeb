@@ -19,6 +19,11 @@ public class PpUcAdminServiceImpl implements PpUcAdminService {
     @Autowired
     private PpUcAdminMapper ppUcAdminMapper;
 
+    /**
+     * 登录查询
+     * @param loginName
+     * @return
+     */
     public PpUcAdmin getAdminInfoByLoginName(String loginName) {
         PpUcAdminExample example = new PpUcAdminExample();
         PpUcAdminExample.Criteria criteria = example.createCriteria();
@@ -35,5 +40,31 @@ public class PpUcAdminServiceImpl implements PpUcAdminService {
         }else{
             return ppUcAdmins.get(0);
         }
+    }
+
+    /**
+     * 列表查询
+     * @param loginName
+     * @param realName
+     * @return
+     */
+    public List<PpUcAdmin> getAdminsForPage(String loginName, String realName) {
+        PpUcAdminExample example = new PpUcAdminExample();
+        PpUcAdminExample.Criteria criteria = example.createCriteria();
+
+        if(!"".equals((loginName == null) ? "" : loginName)){
+            criteria.andLoginNameLike("%"+loginName+"%");
+
+        }
+
+        if(!"".equals((realName == null) ? "" : realName)){
+            criteria.andRealNameLike("%"+realName+"%");
+
+
+        }
+        example.setOrderByClause("id desc");
+
+
+        return ppUcAdminMapper.selectByExample(example);
     }
 }

@@ -37,7 +37,6 @@ public class LoginController extends BaseController{
         Object obj = request.getSession().getAttribute("admin");
 
         if (obj==null){
-            PpUcAdmin admins = (PpUcAdmin) obj;
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("public/login");
             return modelAndView;
@@ -56,6 +55,7 @@ public class LoginController extends BaseController{
         }
         PpUcAdmin admin = ppUcAdminService.getAdminInfoByLoginName(loginName);
 
+        //TODO 判断账户禁用
         if (admin.getPassword()!=null){
             try {
                 boolean checkResult = CheckPassword(password+admin.getSalt(),admin.getPassword());
