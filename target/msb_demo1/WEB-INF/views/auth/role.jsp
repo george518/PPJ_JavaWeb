@@ -46,7 +46,11 @@
 </div>
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    {{#  if(d.status == 1){ }}
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="disable">禁用</a>
+    {{# }else{ }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="enable">启用</a>
+    {{#  } }}
 </script>
 <script>
     layui.use(['table','form','element'], function(){
@@ -63,11 +67,12 @@
                 {field:'id', title: 'ID', align:'center',sort: true, width:150}
                 ,{field:'roleName', title: '角色名称'}
                 ,{field:'detail', title: '备注'}
+                ,{field:'statusText', title: '状态'}
                 ,{fixed: 'right', width:160, align:'center', toolbar: '#bar'}
             ]]
             ,id: 'listReload'
             ,page: true
-            ,height: "full-220"
+            ,height: "full-130"
         });
 
         var $ = layui.$, active = {
@@ -86,12 +91,33 @@
             var data = obj.data;
             if(obj.event === 'edit'){
                 window.location.href="/role/roleEdit?id="+data.id;
-            } else if(obj.event === 'delete'){
+            } else if(obj.event === 'disable'){
+                $.ajax({
+                    type: 'POST',//
+                    url: "/role/changeRoleStatus" ,
+                    data: {
+                        id:data.id,
+                        status:"disable",
+                    } ,
+                    dataType: 'json',
+                    success: function(res){
+                        layer.alert(
+                            res.message,
+                            function (index) {
+                                window.location.reload();
+                                layer.close(index);
+                            }
+                        )
+                        return;
+                    },
+                });
+            }else if(obj.event === 'enable'){
                 $.ajax({
                     type: 'POST',
-                    url: "/role/deleteRole" ,
+                    url: "/role/changeRoleStatus" ,
                     data: {
-                        id:data.id
+                        id:data.id,
+                        status:"enable",
                     } ,
                     dataType: 'json',
                     success: function(res){

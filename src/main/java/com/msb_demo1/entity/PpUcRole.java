@@ -17,6 +17,28 @@ public class PpUcRole {
 
     private Long updateTime;
 
+    private String authNodes;
+
+    private Short checked;//新增
+
+    private String statusText;//新增
+
+    public String getStatusText() {
+        return statusText;
+    }
+
+    public void setStatusText(String statusText) {
+        this.statusText = statusText;
+    }
+
+    public Short getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Short checked) {
+        this.checked = checked;
+    }
+
     public void setStatus(Short status) {
         this.status = status;
     }
@@ -30,8 +52,6 @@ public class PpUcRole {
     public void setAuthNodes(String authNodes) {
         this.authNodes = authNodes;
     }
-
-    private String authNodes;
 
     public Integer getId() {
         return id;

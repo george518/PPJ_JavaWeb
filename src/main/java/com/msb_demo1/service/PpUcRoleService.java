@@ -9,9 +9,9 @@ import java.util.List;
  * @create 2017-11-25 16:17
  **/
 public interface PpUcRoleService {
-    List<PpUcRole> getRolesForPage(String roleName);
+    List<PpUcRole> getRolesForPage(String roleName,Short status);
     PpUcRole getOneRoleById(Integer id);
     Integer createRole(PpUcRole record);
     Integer updateRole(PpUcRole record);
-    Integer deleteRole(Integer roleId);
+    Integer changeRoleStatus(Integer roleId,Short status);
 }

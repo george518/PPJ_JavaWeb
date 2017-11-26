@@ -204,6 +204,24 @@ public class BaseController {
             return false;
     }
 
-//    public boolean SetSession(String )
+    //随机数
+    public  int getRandom(int count) {
+        return (int) Math.round(Math.random() * (count));
+    }
+
+    /**
+     * 生成随机字符串
+     * @param length
+     * @return
+     */
+    public  String getRandomString(int length){
+        String string = "abcdefghijklmnopqrstuvwxyz";
+        StringBuffer sb = new StringBuffer();
+        int len = string.length();
+        for (int i = 0; i < length; i++) {
+            sb.append(string.charAt(getRandom(len-1)));
+        }
+        return sb.toString();
+    }
 
 }

@@ -50,8 +50,14 @@
 
 </div>
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn layui-btn-xs" lay-event="edit">修改</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    <a class="layui-btn layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+
+
+    {{#  if(d.status == 1){ }}
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="disable">禁用</a>
+    {{# }else{ }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="enable">启用</a>
+    {{#  } }}
 </script>
 <script>
     layui.use(['table','form','element'], function(){
@@ -74,7 +80,7 @@
             ]]
             ,id: 'listReload'
             ,page: true
-            ,height: "full-220"
+            ,height: "full-130"
         });
 
         var $ = layui.$, active = {
@@ -94,31 +100,39 @@
         table.on('tool(user)', function(obj){
             var data = obj.data;
             if(obj.event === 'edit'){
-                layer.open({
-                    type: 2,
-                    shade: 0.3,
-                    id:1,
-                    title:"修改尺码",
-                    content: '/size/sizeedit?sizeId='+data.id,
-                    area:['500px','250px'],
-                    cancel:function(){
-                        window.location.reload();
-                        layer.close(index);
-                    }
-                });
-
-            } else if(obj.event === 'delete'){
+                window.location.href="/admin/adminEdit?id="+data.id;
+            } else if(obj.event === 'disable'){
                 $.ajax({
-                    type: 'GET',//todo test delete
-                    url: "/size/deleteSize" ,
+                    type: 'POST',//
+                    url: "/admin/changeAdminStatus" ,
                     data: {
-                        sizeId:data.id
+                        id:data.id,
+                        status:"disable",
                     } ,
                     dataType: 'json',
                     success: function(res){
-
                         layer.alert(
-                            res.reason,
+                            res.message,
+                            function (index) {
+                                window.location.reload();
+                                layer.close(index);
+                            }
+                        )
+                        return;
+                    },
+                });
+            }else if(obj.event === 'enable'){
+                $.ajax({
+                    type: 'POST',
+                    url: "/admin/changeAdminStatus" ,
+                    data: {
+                        id:data.id,
+                        status:"enable",
+                    } ,
+                    dataType: 'json',
+                    success: function(res){
+                        layer.alert(
+                            res.message,
                             function (index) {
                                 window.location.reload();
                                 layer.close(index);
@@ -137,20 +151,9 @@
             active[type] ? active[type].call(this) : '';
         });
 
-        //新增尺码，当前页新增
-        $('#addSize').on('click', function(){
-            layer.open({
-                type: 2,
-                shade: 0.3,
-                id:1,
-                title:"新增尺码",
-                content: '/size/sizeadd',
-                area:['500px','250px'],
-                cancel:function(){
-                    window.location.reload();
-                    layer.close(index);
-                }
-            });
+        //新增管理员
+        $('#addAdmin').on('click', function(){
+            window.location.href="/admin/adminAdd";
         });
         form.render();
     });

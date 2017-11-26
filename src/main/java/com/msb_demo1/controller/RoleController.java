@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.msb_demo1.common.BaseController;
 import com.msb_demo1.entity.PpUcAdmin;
-import com.msb_demo1.entity.PpUcAuth;
 import com.msb_demo1.entity.PpUcRole;
 import com.msb_demo1.service.PpUcRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,9 +55,19 @@ public class RoleController extends BaseController {
                         @RequestParam(defaultValue = "") String roleName,
                         HttpServletRequest request, HttpServletResponse response){
         PageHelper.startPage(page,limit);
-        List<PpUcRole> roles = ppUcRoleService.getRolesForPage(roleName);
+        Short status = -1;//查出全部
+        List<PpUcRole> roles = ppUcRoleService.getRolesForPage(roleName,status);
         PageInfo p = new PageInfo(roles);
-        renderPageSuccessString(response,p.getList(),p.getTotal());
+        List<PpUcRole> list = p.getList();
+        for(PpUcRole item : list)
+        {
+            if(item.getStatus()==1){
+                item.setStatusText("<font>正常</font>");
+            }else{
+                item.setStatusText("<font color='red'>禁用</font>");
+            }
+        }
+        renderPageSuccessString(response,list,p.getTotal());
     }
 
     /**
@@ -142,18 +151,21 @@ public class RoleController extends BaseController {
 
 
     //删除
-    @RequestMapping(value = "deleteRole",method = RequestMethod.POST)
-    public void deleteRole(@RequestParam Integer id, HttpServletRequest request, HttpServletResponse response){
-
-        if (id==1){
-            renderErrorString(response, "超级管理员角色不允许删除");
+    @RequestMapping(value = "changeRoleStatus",method = RequestMethod.POST)
+    public void deleteRole(@RequestParam Integer id,
+                           @RequestParam String status,
+                           HttpServletRequest request,
+                           HttpServletResponse response){
+        Short st = 0;
+        if (status.equals("enable")){
+            st = 1;
         }
         //逻辑删除
-        Integer delNum = ppUcRoleService.deleteRole(id);
+        Integer delNum = ppUcRoleService.changeRoleStatus(id,st);
         if (delNum==1){
-            renderSuccessString(response,null,"删除成功");
+            renderSuccessString(response,null,"操作成功");
         }else {
-            renderErrorString(response, "删除失败");
+            renderErrorString(response, "操作失败");
         }
     }
 

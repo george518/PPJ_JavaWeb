@@ -17,19 +17,22 @@ public class PpUcAdmin {
 
     private String salt;
 
-    private Integer lastLogin;
+    private Long lastLogin;
 
     private String lastIp;
 
-    private Byte status;
+    private Short status;
 
     private Integer createId;
 
     private Integer updateId;
 
-    private Integer createTime;
+    private Long createTime;
 
-    private Integer updateTime;
+    private Long updateTime;
+
+    //附加字段
+    private String statusText;
 
     public String getStatusText() {
         return statusText;
@@ -38,9 +41,6 @@ public class PpUcAdmin {
     public void setStatusText(String statusText) {
         this.statusText = statusText;
     }
-
-    //附加字段
-    private String statusText;
 
     public Integer getId() {
         return id;
@@ -106,11 +106,11 @@ public class PpUcAdmin {
         this.salt = salt == null ? null : salt.trim();
     }
 
-    public Integer getLastLogin() {
+    public Long getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(Integer lastLogin) {
+    public void setLastLogin(Long lastLogin) {
         this.lastLogin = lastLogin;
     }
 
@@ -122,11 +122,11 @@ public class PpUcAdmin {
         this.lastIp = lastIp == null ? null : lastIp.trim();
     }
 
-    public Byte getStatus() {
+    public Short getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Short status) {
         this.status = status;
     }
 
@@ -146,19 +146,19 @@ public class PpUcAdmin {
         this.updateId = updateId;
     }
 
-    public Integer getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Integer createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
-    public Integer getUpdateTime() {
+    public Long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Integer updateTime) {
+    public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
 

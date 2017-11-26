@@ -1,8 +1,6 @@
 package com.msb_demo1.service.impl;
 
 import com.msb_demo1.dao.mapper.PpUcRoleMapper;
-import com.msb_demo1.entity.PpUcAuth;
-import com.msb_demo1.entity.PpUcAuthExample;
 import com.msb_demo1.entity.PpUcRole;
 import com.msb_demo1.entity.PpUcRoleExample;
 import com.msb_demo1.service.PpUcRoleService;
@@ -21,11 +19,12 @@ public class PpUcRoleServiceImpl implements PpUcRoleService {
     @Autowired
     private PpUcRoleMapper ppUcRoleMapper;
 
-    public List<PpUcRole> getRolesForPage(String roleName){
+    public List<PpUcRole> getRolesForPage(String roleName,Short status){
         PpUcRoleExample example = new PpUcRoleExample();
         PpUcRoleExample.Criteria criteria = example.createCriteria();
-        Short status = 1;
-        criteria.andStatusEqualTo(status);
+        if (status!=-1){
+            criteria.andStatusEqualTo(status);
+        }
 
         if(!"".equals((roleName == null) ? "" : roleName)){
             criteria.andRoleNameLike("%"+roleName+"%");
@@ -79,20 +78,21 @@ public class PpUcRoleServiceImpl implements PpUcRoleService {
         return ppUcRoleMapper.updateByExampleSelective(record,example);
     }
 
-    public Integer deleteRole(Integer roleId){
-
+    /**
+     * 修改状态
+     * @param roleId
+     * @param status
+     * @return
+     */
+    public Integer changeRoleStatus(Integer roleId,Short status){
+        if (roleId<1){
+            return 0;
+        }
         PpUcRoleExample example = new PpUcRoleExample();
         PpUcRoleExample.Criteria criteria = example.createCriteria();
         criteria.andIdEqualTo(roleId);
-
         PpUcRole record = getOneRoleById(roleId);
-        Short status = 0;
         record.setStatus(status);
-
-        if (roleId<1){
-            return 0;
-        }else{
-            return ppUcRoleMapper.updateByExampleSelective(record,example);
-        }
+        return ppUcRoleMapper.updateByExampleSelective(record,example);
     }
 }
