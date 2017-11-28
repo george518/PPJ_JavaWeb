@@ -1,6 +1,8 @@
 package com.msb_demo1.service;
 
 import com.msb_demo1.entity.PpUcAuth;
+import com.msb_demo1.entity.PpUcRole;
+
 import java.util.List;
 
 /**
@@ -14,5 +16,6 @@ public interface PpUcAuthService {
     Integer updateAuth(PpUcAuth record);
     Integer deleteAuth(Integer AuthId);
     List<PpUcAuth> getChildAuth(Integer id);
+    List<PpUcAuth> getAuthInfoByAuthIdList(List<Integer> AuthIds);
 
 }

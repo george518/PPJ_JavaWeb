@@ -150,7 +150,13 @@ public class RoleController extends BaseController {
     }
 
 
-    //删除
+    /**
+     * 角色删除，逻辑删除
+     * @param id
+     * @param status
+     * @param request
+     * @param response
+     */
     @RequestMapping(value = "changeRoleStatus",method = RequestMethod.POST)
     public void deleteRole(@RequestParam Integer id,
                            @RequestParam String status,

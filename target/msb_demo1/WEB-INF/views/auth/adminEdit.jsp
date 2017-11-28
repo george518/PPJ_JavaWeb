@@ -72,7 +72,7 @@
             <div class="layui-form-mid layui-word-aux">*</div>
         </div>
 
-        <input type="hidden" id="roleIds" name="roleIds" value="${admin.roleIds}}">
+        <input type="hidden" id="roleIds" name="roleIds" value="${admin.roleIds}">
         <input type="hidden" id="id" name="id" value="${admin.id}">
 
         <div class="layui-form-item">

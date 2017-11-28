@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * 登录相关
@@ -29,7 +30,12 @@ public class LoginController extends BaseController{
 
     @Autowired
     private PpUcAdminService ppUcAdminService;
-    //登录页面
+
+    /**
+     * 登录界面
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "index",method = RequestMethod.GET)
     public ModelAndView index(HttpServletRequest request){
 
@@ -45,7 +51,13 @@ public class LoginController extends BaseController{
 
     }
 
-    //登录
+    /**
+     * 登录处理
+     * @param loginName
+     * @param password
+     * @param request
+     * @param response
+     */
     @RequestMapping(value = "loginIn",method = RequestMethod.POST)
     public void loginIn(@RequestParam String loginName, String password, HttpServletRequest request, HttpServletResponse response){
 
@@ -62,7 +74,13 @@ public class LoginController extends BaseController{
                 if(checkResult){
                     //session 处理
                     request.getSession().setAttribute("admin",admin);
+                    //记录允许访问的Url
+                    List<String> allowUrl = getAdminAuthUrl(admin);
+                    allowUrl.add("/home/index");
+                    allowUrl.add("/home/start");
+                    allowUrl.add("/login/loginOut");
 
+                    request.getSession().setAttribute("allowUrl",allowUrl);
                     renderSuccessString(response,admin.getPassword(),"登录成功");
                 }else{
                     renderErrorString(response,"用户名或密码错误");
@@ -77,7 +95,12 @@ public class LoginController extends BaseController{
         }
     }
 
-    //退出登录
+    /**
+     * 退出登录
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "loginOut",method = RequestMethod.GET)
     public ModelAndView loginOut(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().setAttribute("admin",null);

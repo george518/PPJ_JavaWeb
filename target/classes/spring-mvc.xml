@@ -105,4 +105,12 @@
         <!--<property name="usePool" value="true"/>-->
         <!--<property name="poolConfig" ref="jedisPoolConfig"/>-->
     <!--</bean>-->
+
+    <mvc:interceptors>
+        <!-- 多个拦截器，顺序执行 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.msb_demo1.interceptor.AuthInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

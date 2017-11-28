@@ -36,7 +36,7 @@ public class AuthController extends BaseController {
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public ModelAndView index(HttpServletResponse response) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("pageTitle","权限管理");
+        modelAndView.addObject("pageTitle","权限节点");
         modelAndView.setViewName("auth/auth");
         return modelAndView;
     }
@@ -123,7 +123,12 @@ public class AuthController extends BaseController {
 
     }
 
-    //删除
+    /**
+     * 删除节点
+     * @param id
+     * @param request
+     * @param response
+     */
     @RequestMapping(value = "deleteNode",method = RequestMethod.POST)
     public void deleteNode(@RequestParam Integer id, HttpServletRequest request, HttpServletResponse response){
 

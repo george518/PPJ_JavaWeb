@@ -119,12 +119,13 @@
 
 
     <script>
-        var $,form;
+        var $,form,element;
         layui.config({
             base : "js/"
         }).use(['form','element','layer','jquery'],function(){
             form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
             $ = layui.jquery;
+            element = layui.element;
             form.on("submit",function(data) {
                 var sub_type = data.elem.getAttribute("lay-filter")
                 console.log(data.field);
@@ -204,11 +205,13 @@
                     dataType: 'json',
                     success: function(data) {
                         if(data.status==200){
-                            $("form[name=form]").find("input[name=authUrl]").val(data.data.authName);
+                            $("form[name=form]").find("input[name=authUrl]").val(data.data.authUrl);
                             $("form[name=form]").find("input[name=icon]").val(data.data.icon);
                             $("form[name=form]").find("input[name=sort]").val(data.data.sort);
                             var is_show = data.data.isShow
                             $("form[name=form]").find("input[type=radio][value="+is_show+"]").click();
+                            $("form[name=form]").find("input[type=radio][value="+is_show+"]").attr("checked",true);
+                            element.init();
                             //form.render();
                         }
                     }

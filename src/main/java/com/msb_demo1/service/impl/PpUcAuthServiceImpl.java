@@ -4,10 +4,13 @@ package com.msb_demo1.service.impl;
 import com.msb_demo1.dao.mapper.PpUcAuthMapper;
 import com.msb_demo1.entity.PpUcAuth;
 import com.msb_demo1.entity.PpUcAuthExample;
+import com.msb_demo1.entity.PpUcRole;
+import com.msb_demo1.entity.PpUcRoleExample;
 import com.msb_demo1.service.PpUcAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +23,10 @@ public class PpUcAuthServiceImpl implements PpUcAuthService {
     @Autowired
     private PpUcAuthMapper ppUcAuthMapper;
 
-    //获取全部节点
+    /**
+     * 获取全部节点
+     * @return
+     */
     public List<PpUcAuth> getAllAuth() {
         PpUcAuthExample example = new PpUcAuthExample();
         PpUcAuthExample.Criteria criteria = example.createCriteria();
@@ -29,6 +35,11 @@ public class PpUcAuthServiceImpl implements PpUcAuthService {
         return ppUcAuthMapper.selectByExample(example);
     }
 
+    /**
+     * 获取子节点
+     * @param id
+     * @return
+     */
     public List<PpUcAuth> getChildAuth(Integer id) {
         PpUcAuthExample example = new PpUcAuthExample();
         PpUcAuthExample.Criteria criteria = example.createCriteria();
@@ -38,7 +49,11 @@ public class PpUcAuthServiceImpl implements PpUcAuthService {
         return ppUcAuthMapper.selectByExample(example);
     }
 
-    //获取单个几点根据ID
+    /**
+     * 获取单个节点
+     * @param id
+     * @return
+     */
     public PpUcAuth getOneAuthById(Integer id){
         PpUcAuthExample example = new PpUcAuthExample();
         PpUcAuthExample.Criteria criteria = example.createCriteria();
@@ -55,10 +70,20 @@ public class PpUcAuthServiceImpl implements PpUcAuthService {
         }
     }
 
+    /**
+     * 新增数据
+     * @param record
+     * @return
+     */
     public Integer createAuth(PpUcAuth record) {
         return ppUcAuthMapper.insert(record);
     }
 
+    /**
+     * 修改数据
+     * @param record
+     * @return
+     */
     public Integer updateAuth(PpUcAuth record){
         PpUcAuthExample example = new PpUcAuthExample();
         PpUcAuthExample.Criteria criteria = example.createCriteria();
@@ -71,7 +96,11 @@ public class PpUcAuthServiceImpl implements PpUcAuthService {
         }
     }
 
-    //逻辑删除
+    /**
+     * 逻辑删除节点数据
+     * @param authId
+     * @return
+     */
     public Integer deleteAuth(Integer authId){
         PpUcAuthExample example = new PpUcAuthExample();
         PpUcAuthExample.Criteria criteria = example.createCriteria();
@@ -85,5 +114,18 @@ public class PpUcAuthServiceImpl implements PpUcAuthService {
         }else{
             return ppUcAuthMapper.updateByExampleSelective(record,example);
         }
+    }
+
+    public List<PpUcAuth> getAuthInfoByAuthIdList(List<Integer> AuthIds){
+        PpUcAuthExample example = new PpUcAuthExample();
+        PpUcAuthExample.Criteria criteria = example.createCriteria();
+
+        if (AuthIds.size()<1){
+            return new ArrayList<PpUcAuth>();
+        }
+        criteria.andIdIn(AuthIds);
+        criteria.andStatusEqualTo(1);
+        example.setOrderByClause("sort asc");
+        return ppUcAuthMapper.selectByExample(example);
     }
 }

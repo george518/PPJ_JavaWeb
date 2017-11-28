@@ -40,17 +40,40 @@
             <div class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
+                <%--<li class="layui-nav-item layui-nav-itemed">--%>
+                    <%--<a class="" href="javascript:;">--%>
+                        <%--<i class="fa fa-id-card"></i> &nbsp;&nbsp;<span>权限管理</span>--%>
+                    <%--</a>--%>
+                    <%--<dl class="layui-nav-child">--%>
+                        <%--<dd><a data-url="/admin/index" data-icon="&#xe715;" data-title="管理员管理" kit-target data-id="1"><i class="fa fa-user-o"></i>  &nbsp;&nbsp;<span style="cursor: pointer">管理员管理</span></a></dd>--%>
+                        <%--<dd><a data-url="/role/index" data-icon="&#xe715;" data-title="角色管理" kit-target data-id="2"><i class="fa fa-user-circle-o"></i>  &nbsp;&nbsp;<span style="cursor: pointer">角色管理</span></a></dd>--%>
+                        <%--<dd><a data-url="/auth/index" data-icon="&#xe715;" data-title="权限节点" kit-target data-id="3"><i class="fa fa-id-card"></i>  &nbsp;&nbsp;<span style="cursor: pointer">权限因子</span></a></dd>--%>
+                    <%--</dl>--%>
+                <%--</li>--%>
 
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">
-                        <i class="fa fa-id-card"></i> &nbsp;&nbsp;<span>权限管理</span>
-                    </a>
-                    <dl class="layui-nav-child">
-                        <dd><a data-url="/admin/index" data-icon="&#xe715;" data-title="管理员管理" kit-target data-id="1"><i class="fa fa-user-o"></i>  &nbsp;&nbsp;<span style="cursor: pointer">管理员管理</span></a></dd>
-                        <dd><a data-url="/role/index" data-icon="&#xe715;" data-title="角色管理" kit-target data-id="2"><i class="fa fa-user-circle-o"></i>  &nbsp;&nbsp;<span style="cursor: pointer">角色管理</span></a></dd>
-                        <dd><a data-url="/auth/index" data-icon="&#xe715;" data-title="权限因子" kit-target data-id="3"><i class="fa fa-id-card"></i>  &nbsp;&nbsp;<span style="cursor: pointer">权限因子</span></a></dd>
-                    </dl>
-                </li>
+                <%--<li class="layui-nav-item layui-nav-itemed">--%>
+                    <%--<a class="" href="javascript:;">--%>
+                        <%--<i class="fa fa-id-card"></i> &nbsp;&nbsp;<span>用户中心</span>--%>
+                    <%--</a>--%>
+                    <%--<dl class="layui-nav-child">--%>
+                        <%--<dd><a data-url="/user/index" data-icon="&#xe715;" data-title="资料修改" kit-target data-id="1"><i class="fa fa-user-o"></i>  &nbsp;&nbsp;<span style="cursor: pointer">资料修改</span></a></dd>--%>
+                    <%--</dl>--%>
+                <%--</li>--%>
+
+                <c:forEach items="${menus}" var="menu">
+                    <li class="layui-nav-item">
+                        <a class="" href="javascript:;">
+                            <i class="fa ${menu.icon}"></i> &nbsp;&nbsp;<span>${menu.authName}</span>
+                        </a>
+                        <c:forEach items="${menu.childNodes}" var="cmenu">
+                        <dl class="layui-nav-child">
+                            <dd><a data-url="${cmenu.authUrl}" data-icon="&#xe715;" data-title="${cmenu.authName}" kit-target data-id="${cmenu.id}"><i class="fa ${cmenu.icon}"></i>  &nbsp;&nbsp;<span style="cursor: pointer">${cmenu.authName}</span></a></dd>
+                        </dl>
+                        </c:forEach>
+                    </li>
+                </c:forEach>
+
+
             </ul>
         </div>
     </div>

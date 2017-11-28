@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.msb_demo1.common.BaseController;
 import com.msb_demo1.entity.PpUcAdmin;
-import com.msb_demo1.entity.PpUcAuth;
 import com.msb_demo1.entity.PpUcRole;
 import com.msb_demo1.service.PpUcAdminService;
 import com.msb_demo1.service.PpUcRoleService;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
@@ -122,12 +119,23 @@ public class AdminController extends BaseController {
             }
         }
         modelAndView.addObject("roles",roles);
-        modelAndView.addObject("pageTitle","编辑角色");
+        modelAndView.addObject("pageTitle","编辑管理员");
         modelAndView.setViewName("auth/adminEdit");
         return modelAndView;
     }
 
-
+    /**
+     * 保存管理员信息
+     * @param id
+     * @param loginName
+     * @param realName
+     * @param phone
+     * @param email
+     * @param roleIds
+     * @param resetPwd
+     * @param request
+     * @param response
+     */
     @RequestMapping(value = "saveAdmin",method = RequestMethod.POST)
     public void saveNode(@RequestParam(defaultValue = "0") Integer id,
                          @RequestParam(defaultValue = "") String loginName,
@@ -231,5 +239,7 @@ public class AdminController extends BaseController {
             renderErrorString(response, "操作失败");
         }
     }
+
+
 
 }

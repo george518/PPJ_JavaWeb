@@ -1,5 +1,10 @@
 package com.msb_demo1.entity;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
+
 public class PpUcAuth {
     private Integer id;
 
@@ -24,6 +29,17 @@ public class PpUcAuth {
     private long createTime;
 
     private long updateTime;
+
+    private List<PpUcAuth> childNodes;
+
+    public List<PpUcAuth> getChildNodes() {
+
+        return childNodes;
+    }
+
+    public void setChildNodes(List<PpUcAuth> childNodes) {
+        this.childNodes = childNodes;
+    }
 
     public Integer getId() {
         return id;

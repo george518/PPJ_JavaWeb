@@ -1,5 +1,6 @@
 package com.msb_demo1.common.filter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -8,18 +9,23 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import com.msb_demo1.common.BaseController;
 
 /**
  * Created by cc on 2017/11/17.
  */
-public class SessionFilter extends OncePerRequestFilter {
+public class SessionFilter extends OncePerRequestFilter{
+
+    @Autowired
+    private BaseController baseController;
 
     /** 登录验证过滤器 */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // 不过滤的uri
         String[] notFilter =
-                new String[] {"/static/img", "/static/js", "/static/css", "/static/layui","/static/font-awesome","/static/zTree3","/login/index","/login/loginIn"};
+                new String[] {"/static/img",
+                        "/static/js", "/static/css", "/static/layui","/static/font-awesome","/static/zTree3","/login/index","/login/loginIn"};
         // 请求的uri
         String uri = request.getRequestURI();
         // 是否过滤
@@ -53,6 +59,18 @@ public class SessionFilter extends OncePerRequestFilter {
             }
             else
             {
+//                //判断是否具有权限
+//                Object objs = request.getSession().getAttribute("admin");
+//                PpUcAdmin admin = (PpUcAdmin)obj;
+//
+//                List<String> allowUrl = baseController.getAdminAuthUrl(admin);
+//                allowUrl.add("/home/index");
+//                allowUrl.add("/home/start");
+//                if(!allowUrl.contains(uri)){
+//                    (new BaseController()).renderErrorString(response,"权限不足");
+//                    return;
+//                }
+
                 // 如果session中存在登录者实体，则继续
                 filterChain.doFilter(request, response);
             }

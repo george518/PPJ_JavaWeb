@@ -7,7 +7,7 @@ import com.msb_demo1.service.PpUcRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * @author haodaquan
@@ -18,6 +18,7 @@ import java.util.List;
 public class PpUcRoleServiceImpl implements PpUcRoleService {
     @Autowired
     private PpUcRoleMapper ppUcRoleMapper;
+    private PpUcRoleExample.Criteria criteria;
 
     public List<PpUcRole> getRolesForPage(String roleName,Short status){
         PpUcRoleExample example = new PpUcRoleExample();
@@ -94,5 +95,21 @@ public class PpUcRoleServiceImpl implements PpUcRoleService {
         PpUcRole record = getOneRoleById(roleId);
         record.setStatus(status);
         return ppUcRoleMapper.updateByExampleSelective(record,example);
+    }
+
+    /**
+     * 根据roleid获取role信息
+     * @param roleIds
+     * @return
+     */
+    public List<PpUcRole> getRoleInfoByRoleIdList(List<Integer> roleIds){
+        PpUcRoleExample example = new PpUcRoleExample();
+        PpUcRoleExample.Criteria criteria = example.createCriteria();
+        if (roleIds.size()<1){
+            return new ArrayList<PpUcRole>();
+        }
+        criteria.andIdIn(roleIds);
+        criteria.andStatusEqualTo(Short.valueOf("1"));
+        return ppUcRoleMapper.selectByExample(example);
     }
 }

@@ -87,6 +87,26 @@
       order by ${orderByClause}
     </if>
   </select>
+  <!--多角色查询权限列表-->
+  <!--<select id="joinMoreExample" parameterType="com.msb_demo1.entity.PpUcRoleExample" resultMap="MoreResultMap">-->
+    <!--SELECT-->
+    <!--sa.id, sa.size_id, sa.supplier_id, sa.supplier_size_name, sa.category, sa.supplier_image, sa.size_category_key,-->
+    <!--sz.id AS sz_id, sz.sizename AS sz_sizename, sz.sizetype AS sz_sizetype,-->
+    <!--sp.id AS sp_id, sp.name AS sp_name, sp.phone AS sp_phone, sp.status AS sp_status, sp.buy_factor AS sp_buy_factor, sp.sell_factor AS sp_sell_factor,-->
+    <!--sp.market_factor AS sp_market_factor, sp.rate_code AS sp_rate_code, sp.language AS sp_language, sp.first_weight AS sp_first_weight,-->
+    <!--sp.first_weight_price AS sp_first_weight_price, sp.added_weight AS sp_added_weight, sp.added_weight_price AS sp_added_weight_price,-->
+    <!--sp.location AS sp_location, sp.country AS sp_country, sp.city AS sp_city, sp.logistics_channel AS sp_logistics_channel, sp.system_type AS sp_system_type,-->
+    <!--sp.order_type AS sp_order_type, sp.supplier_type AS sp_supplier_type, sp.supplier_location AS sp_supplier_location, sp.sync_state AS sp_sync_state-->
+    <!--FROM size_adapter AS sa-->
+    <!--LEFT JOIN size AS sz ON sz.id = sa.size_id-->
+    <!--LEFT JOIN supplier AS sp ON sp.id = sa.supplier_id-->
+    <!--<if test="_parameter != null">-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null">-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
   <delete id="deleteByExample" parameterType="com.msb_demo1.entity.PpUcRoleExample">
     delete from pp_uc_role
     <if test="_parameter != null">

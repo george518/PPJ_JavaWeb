@@ -14,4 +14,5 @@ public interface PpUcRoleService {
     Integer createRole(PpUcRole record);
     Integer updateRole(PpUcRole record);
     Integer changeRoleStatus(Integer roleId,Short status);
+    List<PpUcRole> getRoleInfoByRoleIdList(List<Integer> roleIds);
 }
