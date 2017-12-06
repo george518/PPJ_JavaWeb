@@ -1,7 +1,6 @@
 package com.msb_demo1.interceptor;
 
 import com.msb_demo1.common.BaseController;
-import com.msb_demo1.entity.PpUcAdmin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

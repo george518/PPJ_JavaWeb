@@ -23,7 +23,7 @@
 <body>
 <div class="layui-layout layui-layout-admin kit-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">JavaDomo</div>
+        <div class="layui-logo">PPJ_JavaWeb</div>
         <div class="layui-logo kit-logo-mobile">P</div>
         <ul class="layui-nav layui-layout-right kit-nav">
             <li class="layui-nav-item">
@@ -40,26 +40,6 @@
             <div class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
-                <%--<li class="layui-nav-item layui-nav-itemed">--%>
-                    <%--<a class="" href="javascript:;">--%>
-                        <%--<i class="fa fa-id-card"></i> &nbsp;&nbsp;<span>权限管理</span>--%>
-                    <%--</a>--%>
-                    <%--<dl class="layui-nav-child">--%>
-                        <%--<dd><a data-url="/admin/index" data-icon="&#xe715;" data-title="管理员管理" kit-target data-id="1"><i class="fa fa-user-o"></i>  &nbsp;&nbsp;<span style="cursor: pointer">管理员管理</span></a></dd>--%>
-                        <%--<dd><a data-url="/role/index" data-icon="&#xe715;" data-title="角色管理" kit-target data-id="2"><i class="fa fa-user-circle-o"></i>  &nbsp;&nbsp;<span style="cursor: pointer">角色管理</span></a></dd>--%>
-                        <%--<dd><a data-url="/auth/index" data-icon="&#xe715;" data-title="权限节点" kit-target data-id="3"><i class="fa fa-id-card"></i>  &nbsp;&nbsp;<span style="cursor: pointer">权限因子</span></a></dd>--%>
-                    <%--</dl>--%>
-                <%--</li>--%>
-
-                <%--<li class="layui-nav-item layui-nav-itemed">--%>
-                    <%--<a class="" href="javascript:;">--%>
-                        <%--<i class="fa fa-id-card"></i> &nbsp;&nbsp;<span>用户中心</span>--%>
-                    <%--</a>--%>
-                    <%--<dl class="layui-nav-child">--%>
-                        <%--<dd><a data-url="/user/index" data-icon="&#xe715;" data-title="资料修改" kit-target data-id="1"><i class="fa fa-user-o"></i>  &nbsp;&nbsp;<span style="cursor: pointer">资料修改</span></a></dd>--%>
-                    <%--</dl>--%>
-                <%--</li>--%>
-
                 <c:forEach items="${menus}" var="menu">
                     <li class="layui-nav-item">
                         <a class="" href="javascript:;">
@@ -84,7 +64,7 @@
 
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        2017 &copy; JavaDemo  Power by SpringMvc
+        2017 &copy; PPJ_JavaWeb  Power by SpringMvc <a href="https://github.com/george518/PPJ_JavaWeb" target="_blank">github下载</a>
     </div>
 </div>
 

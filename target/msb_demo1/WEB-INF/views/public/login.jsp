@@ -22,7 +22,7 @@
 <div class="layui-carousel video_mask bg-img" id="login_carousel" >
 
     <div class="login layui-anim layui-anim-up">
-        <h1>Java 管理后台</h1></p>
+        <h1>PPJ_JavaWeb 管理后台</h1></p>
         <form class="layui-form" action="" onsubmit="javascript:return false;" method="post">
             <div class="layui-form-item">
                 <input type="text" name="loginName" id="loginName" lay-verify="required" placeholder="请输入账号" autocomplete="off"  value="admin" class="layui-input">
