@@ -34,7 +34,7 @@ PPJ_JavaWeb是一个基于SpringMVC+Mybatis+Maven的web应用，内含RBAC权限
 ----
 1、安装maven
 2、导入数据库
-3、配置相关
+3、配置相关,访问
 
 有问题联系我
 ----
